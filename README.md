@@ -19,6 +19,17 @@ Extract SHA1 from [Reference Data Set](https://www.nist.gov/itl/ssd/software-qua
 Except `pv` and `unzip`, all the above mentioned tools should be present in a Linux distribution.
 
 
+## Download and mount
+
+The full modern RDS Version 2.59 of December 2017 is [downloaded](https://www.nist.gov/itl/ssd/software-quality-group/nsrl-download/current-rds-hash-sets) and used.
+
+The content of the iso image `RDS_modern.iso` is made accessible through `/media/` :
+
+```bash
+mount -o ro ./RDS_modern.iso /media/
+```
+
+
 ## Disk space
 
 Uncompaction of the archive `NSRLFile.txt.zip` would require 13.7 Gb of disk space for 112 182 782 records :
