@@ -10,8 +10,10 @@ Extract SHA1 from [Reference Data Set](https://www.nist.gov/itl/ssd/software-qua
 - 1x Gb of disk space
 - `unzip` to extract `NSRLFile.txt.zip` to pipe
 - `python2` to convert files format and preserve some space
+- `cut` to cut fields
 - `pv` (optional) to monitor the progress of work
 - `wc` (optional) to do some counts
+
 
 ## Disk space
 
@@ -22,3 +24,5 @@ unzip -p /media/NSRLFile.txt.zip | pv | wc
 112182782 116433441 14740940496
 ```
 Extraction of strictly necessary data with reformatting should save some precious gigabytes.
+
+The formatting is carried out by the Python script `csv2tsv` which removes all double quots and separates the fields by a tabulation, which will make it easier to process them, especially with `cut`.
