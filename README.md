@@ -106,7 +106,7 @@ unzip -p /media/NSRLFile.txt.zip | pv | ./csv2tsv | cut -f 1,4 | egrep '\.(jpg|j
 sed -i '1i SHA-1' image
 ```
 
-The file `image` weighs 206 Mb and contains 5 265 462 records.
+The file `image` weighs 206 Mb and contains 5 265 462 records (13%).
 
 
 ## Extract Microsoft SHA1
@@ -146,4 +146,4 @@ Extract SHA1 :
 17553387 17553387 719688832
 ```
 
-The file `microsoft.sha1` weighs 687 Mb and contains 17 553 386 records.
+The file `microsoft.sha1` weighs 687 Mb and contains 17 553 386 records (44%).
