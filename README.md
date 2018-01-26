@@ -134,9 +134,16 @@ Extract products :
 cat microsoft.product
 62	the compaq personal computer startup diskette	609
 62	the compaq personal computer startup diskette	609
-66	microsoft foxpro	609
 ...
-183980	windows vista ultimate 32bit sp1	609
 184355	microsoft windows xp professional	609
 184355	microsoft windows xp professional	609
 ```
+
+Extract SHA1 :
+
+```bash
+( echo SHA-1; fgrep -f <( cut -f 1 microsoft.product | sed 's/^/\t/g' ) nsrl | cut -f 1 | sort -u ) | tee microsoft.sha1 | wc
+17553387 17553387 719688832
+```
+
+The file `microsoft.sha1` weighs 687 Mb and contains 17 553 386 records.
