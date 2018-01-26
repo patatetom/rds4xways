@@ -180,3 +180,8 @@ cat windows.product
 184362	matlab & simulink	237
 184363	oracle9i database release 2	189
 ```
+
+Extract SHA1 :
+
+```bash
+```
