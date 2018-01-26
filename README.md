@@ -95,6 +95,8 @@ The file `sha1` weighs 1,6 Gb and contains 39 599 835 records.
 
 ***This only way of doing so, based on the extension of the file name, will import SHA1 that are not necessarily those of images and leave out SHA1 of images that will not have been imported because there is no extension to the file name.***
 
+Extensions used for the main image formats are searched :
+
 ```bash
 unzip -p /media/NSRLFile.txt.zip | pv | ./csv2tsv | cut -f 1,4 | egrep '\.(jpg|jpeg|png|gif|bmp|svg|tif|psd|pcx)$' | cut -f 1 | sort -u | tee image | wc
 13,7GiO 0:37:49 [6,19MiB/s] [             <=>                         ]
@@ -105,3 +107,36 @@ sed -i '1i SHA-1' image
 ```
 
 The file `image` weighs 206 Mb and contains 5 265 462 records.
+
+
+## Extract Microsoft SHA1
+
+Extract manufacturer :
+
+```bash
+./csv2tsv < /media/NSRLMfg.txt | grep microsoft | tee microsoft | wc
+3 9 68
+```
+```bash
+cat microsoft
+3912	microsoft corporation
+609	microsoft
+610	microsoft game studios
+```
+
+Extract products :
+
+```bash
+./csv2tsv < /media/NSRLProd.txt | cut -f 1,2,5 | fgrep -f <( cut -f 1 microsoft | sed 's/^/\t/g' ) | tee microsoft.product | wc
+4020 26362 163827
+```
+```bash
+cat microsoft.product
+62	the compaq personal computer startup diskette	609
+62	the compaq personal computer startup diskette	609
+66	microsoft foxpro	609
+...
+183980	windows vista ultimate 32bit sp1	609
+184355	microsoft windows xp professional	609
+184355	microsoft windows xp professional	609
+```
