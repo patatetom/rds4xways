@@ -13,10 +13,12 @@ Extract SHA1 from [Reference Data Set](https://www.nist.gov/itl/ssd/software-qua
 - `pv` (optional) to monitor the progress of work
 - `wc` (optional) to do some counts
 
+## Disk space
 
-Uncompaction of the archive `NSRLFile.txt.zip` would require 13.7 Gb (14740940496/1024^3) of disk space for 112 182 782 records :
+Uncompaction of the archive `NSRLFile.txt.zip` would require 13.7 Gb of disk space for 112 182 782 records :
 ```bash
 unzip -p /media/NSRLFile.txt.zip | pv | wc
 13,7GiO 0:07:19 [  32MiB/s] [       <=>                               ]
 112182782 116433441 14740940496
 ```
+Extraction of strictly necessary data with reformatting should save some precious gigabytes.
