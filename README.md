@@ -207,3 +207,22 @@ Extract SHA1 :
 ```
 
 The file `windows.sha1` weighs 1,4 Gb for 35 337 413 records (89%).
+
+
+
+## More SHA1 sets
+
+With the same constraints as for images, the variable `re` can be modified to extract file names with the `.exe` extension :
+
+```bash
+# re='\.(com|sys|dll|exe)$'
+re='\.exe$'
+unzip -p /media/NSRLFile.txt.zip | ./csv2tsv | cut -f 1,4 | egrep $re | cut -f 1 | sort -u > executable
+```
+
+Images can be reduced to Microsoft or Windows with the use of `comm` :
+
+```bash
+comm -1 -2 microsoft.sha1 image > image.microsoft.sha1
+comm -1 -2 windows.sha1 image > image.windows.sha1
+```
