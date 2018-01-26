@@ -9,9 +9,9 @@ Extract SHA1 from [Reference Data Set](https://www.nist.gov/itl/ssd/software-qua
 - few Gb of memory
 - 1x Gb of disk space
 - `unzip` to extract `NSRLFile.txt.zip` to pipe
-- `wc` to do some counts
 - `python2` to convert files format and preserve some space
-- `pv` (optional)
+- `pv` (optional) to monitor the progress of work
+- `wc` (optional) to do some counts
 
 
 Uncompaction of the archive `NSRLFile.txt.zip` would require 13.7 Gb (14740940496/1024^3) of disk space for 112 182 782 records :
