@@ -33,11 +33,31 @@ mount -o ro ./RDS_modern.iso /media/
 ## Disk space
 
 Uncompaction of the archive `NSRLFile.txt.zip` would require 13.7 Gb of disk space for 112 182 782 records :
+
 ```bash
 unzip -p /media/NSRLFile.txt.zip | pv | wc
 13,7GiO 0:07:19 [  32MiB/s] [       <=>                               ]
 112182782 116433441 14740940496
 ```
+
 Extraction of strictly necessary data with reformatting will save some precious gigabytes.
 
 The formatting is carried out by the Python script `csv2tsv` which removes all double quots and separates the fields by a tabulation, which will make it easier to process them, especially with `cut`.
+
+
+## Extract data
+
+The file `NSRLFile.txt` is structured as follows :
+
+```bash
+unzip -p /media/NSRLFile.txt.zip | head -3
+"SHA-1","MD5","CRC32","FileName","FileSize","ProductCode","OpSystemCode","SpecialCode"
+"0000002D9D62AEBE1E0E9DB6C4C4C7C16A163D2C","1D6EBB5A789ABD108FF578263E1F40F3","FFFFFFFF","_sfx_0024._p",4109,11063,"358",""
+"0000004DA6391F7F5D2F7FCCF36CEBDA60C6EA02","0E53C14A3E48D94FF596A2824307B492","AA6A7B16","00br2026.gif",2226,8280,"358",""
+```
+
+Only fields `SHA-1` and `ProductCode` are extracted from it :
+
+```bash
+unzip -p /media/NSRLFile.txt.zip | sed 1d | ./csv2tsv | cut -f 1,6 | sort -u | tee nsrl | wc -l
+```
