@@ -10,7 +10,7 @@ Extraction of SHA1 sets from [Reference Data Set](https://www.nist.gov/itl/ssd/s
 - 1x Gb of disk space
 - `unzip` to extract `NSRLFile.txt.zip` to pipe
 - `python2` to convert files format and preserve some space
-- `sed` to delete headers and more
+- `sed` to add/delete headers and more
 - `fgrep` to match fixed strings
 - `cut` to cut fields
 - `tee` (optional) to duplicate the data stream
