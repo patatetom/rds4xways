@@ -147,3 +147,36 @@ Extract SHA1 :
 ```
 
 The file `microsoft.sha1` weighs 687 Mb and contains 17 553 386 records (44%).
+
+
+## Extract «Windows» SHA1
+
+Extract operating systems :
+
+```bash
+./csv2tsv < /media/NSRLOS.txt | cut -f 1,2,4 | fgrep -f <( cut -f 1 microsoft | sed 's/^/\t/g' ) | tee microsoft.os | wc
+392 2403 12664
+```
+```bash
+cat microsoft.os
+109	novel dos 7.0	609
+115	pcdos 5.0	609
+...
+934	windows 8 enterprise	609
+947	windows 10 ltsb	609
+```
+
+Extract products :
+
+```bash
+./csv2tsv < /media/NSRLProd.txt | cut -f 1,2,4 | fgrep -f <( cut -f 1 microsoft.os | sed 's/^/\t/g' ) | tee windows.product | wc
+  27804  162979 1001782
+```
+```bash
+cat windows.product
+9	pcanywhere	190
+9	pcanywhere	200
+...
+184362	matlab & simulink	237
+184363	oracle9i database release 2	189
+```
