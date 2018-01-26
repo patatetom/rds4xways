@@ -61,4 +61,15 @@ Only fields `SHA-1` and `ProductCode` are extracted from it :
 
 ```bash
 unzip -p /media/NSRLFile.txt.zip | sed 1d | ./csv2tsv | cut -f 1,6 | sort -u | tee nsrl | wc -l
+104339754
+```
+```bash
+ll -gGh nsrl 
+-rw-r--r--. 1 4.6G Jan 26 11:15 nsrl
+```
+```bash
+head -3 nsrl 
+0000002d9d62aebe1e0e9db6c4c4c7c16a163d2c	11063
+0000004da6391f7f5d2f7fccf36cebda60c6ea02	8280
+00000142988afa836117b1b572fae4713f200567	10463
 ```
