@@ -61,7 +61,7 @@ Only fields `SHA-1` and `ProductCode` are extracted from it :
 
 ```bash
 unzip -p /media/NSRLFile.txt.zip | pv | sed 1d | ./csv2tsv | cut -f 1,6 | sort -u | tee nsrl | wc
-13,7GiO 0:27:56 [  12MiB/s] [          <=>                            ]
+13,7GiO 0:29:56 [  7MiB/s] [          <=>                            ]
 104339754  208679508 4857127280
 ```
 ```bash
@@ -88,9 +88,20 @@ SHA-1
 0000004da6391f7f5d2f7fccf36cebda60c6ea02
 ```
 
-The file `sha1` weighs 1,6 Gb contains 39 599 836 records.
+The file `sha1` weighs 1,6 Gb and contains 39 599 835 records.
 
 
 ## Extract images SHA1
 
 ***This only way of doing so, based on the extension of the file name, will import SHA1 that are not necessarily those of images and leave out SHA1 of images that will not have been imported because there is no extension to the file name.***
+
+```bash
+unzip -p /media/NSRLFile.txt.zip | pv | ./csv2tsv | cut -f 1,4 | egrep '\.(jpg|jpeg|png|gif|bmp|svg|tif|psd|pcx)$' | cut -f 1 | sort -u | tee image | wc
+13,7GiO 0:37:49 [6,19MiB/s] [             <=>                         ]
+5265462 5265462 215883942
+```
+```bash
+sed -i '1i SHA-1' image
+```
+
+The file `image` weighs 206 Mb and contains 5 265 462 records.
