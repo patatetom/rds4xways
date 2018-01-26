@@ -23,6 +23,6 @@ unzip -p /media/NSRLFile.txt.zip | pv | wc
 13,7GiO 0:07:19 [  32MiB/s] [       <=>                               ]
 112182782 116433441 14740940496
 ```
-Extraction of strictly necessary data with reformatting should save some precious gigabytes.
+Extraction of strictly necessary data with reformatting will save some precious gigabytes.
 
 The formatting is carried out by the Python script `csv2tsv` which removes all double quots and separates the fields by a tabulation, which will make it easier to process them, especially with `cut`.
