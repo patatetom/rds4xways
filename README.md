@@ -107,16 +107,16 @@ Extensions used for the main image formats are searched :
 
 ```bash
 re='\.(jpg|jpeg|png|gif|bmp|svg|tif|psd|pcx)$'
-# unzip -p /media/NSRLFile.txt.zip | ./csv2tsv | cut -f 1,4 | egrep $re | cut -f 1 | sort -u > image
-unzip -p /media/NSRLFile.txt.zip | pv | ./csv2tsv | cut -f 1,4 | egrep $re | cut -f 1 | sort -u | tee image | wc
+# unzip -p /media/NSRLFile.txt.zip | ./csv2tsv | cut -f 1,4 | egrep $re | cut -f 1 | sort -u > image.sha1
+unzip -p /media/NSRLFile.txt.zip | pv | ./csv2tsv | cut -f 1,4 | egrep $re | cut -f 1 | sort -u | tee image.sha1 | wc
 13,7GiO 0:37:49 [6,19MiB/s] [             <=>                         ]
 5265462 5265462 215883942
 ```
 ```bash
-sed -i '1i SHA-1' image
+sed -i '1i SHA-1' image.sha1
 ```
 
-The file `image` weighs 206 Mb for 5 265 462 records (13%).
+The file `image.sha1` weighs 206 Mb for 5 265 462 records (13%).
 
 
 
@@ -217,12 +217,13 @@ With the same constraints as for images, the variable `re` can be modified to ex
 ```bash
 # re='\.(com|sys|dll|exe)$'
 re='\.exe$'
-unzip -p /media/NSRLFile.txt.zip | ./csv2tsv | cut -f 1,4 | egrep $re | cut -f 1 | sort -u > executable
+unzip -p /media/NSRLFile.txt.zip | ./csv2tsv | cut -f 1,4 | egrep $re | cut -f 1 | sort -u > executable.sha1
+sed -i '1i SHA-1' executable.sha1
 ```
 
 Images can be reduced to Microsoft or Windows with the use of `comm` :
 
 ```bash
-comm -1 -2 microsoft.sha1 image > image.microsoft.sha1
-comm -1 -2 windows.sha1 image > image.windows.sha1
+comm -1 -2 microsoft.sha1 image.sha1 > image.microsoft.sha1
+comm -1 -2 windows.sha1 image.sha1 > image.windows.sha1
 ```
