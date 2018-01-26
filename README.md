@@ -93,4 +93,4 @@ The file `sha1` weighs 1,6 Gb contains 39 599 836 records.
 
 ## Extract images SHA1
 
-***This only way of doing so, based on the extension of the file name, will import SHA1 that are not necessarily those of images and leave out SHA1 that will not have been imported because there is no extension to the file name.***
+***This only way of doing so, based on the extension of the file name, will import SHA1 that are not necessarily those of images and leave out SHA1 of images that will not have been imported because there is no extension to the file name.***
