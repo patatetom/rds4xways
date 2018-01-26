@@ -22,7 +22,7 @@ Except `pv` and `unzip`, all the above mentioned tools should be present in a Li
 
 ## Download and mount
 
-The full modern RDS Version 2.59 of December 2017 is [downloaded](https://www.nist.gov/itl/ssd/software-quality-group/nsrl-download/current-rds-hash-sets) and used.
+The full modern RDS Version 2.59 of December 2017 is [downloaded](https://www.nist.gov/itl/ssd/software-quality-group/nsrl-download/current-rds-hash-sets) (3,1 Gb) and used.
 
 The content of the iso image `RDS_modern.iso` is made accessible through `/media/` :
 
@@ -184,4 +184,8 @@ cat windows.product
 Extract SHA1 :
 
 ```bash
+( echo SHA-1; fgrep -f <( cut -f 1 windows.product | sed 's/^/\t/g' ) nsrl | cut -f 1 | sort -u ) | tee windows.sha1 | wc
+35337414 35337414 1448833939
 ```
+
+The file `windows.sha1` weighs 1,4 Gb and contains 35 337 413 records (89%).
