@@ -10,7 +10,8 @@ Extract SHA1 from [Reference Data Set](https://www.nist.gov/itl/ssd/software-qua
 - 1x Gb of disk space
 - `unzip` to extract `NSRLFile.txt.zip` to pipe
 - `python2` to convert files format and preserve some space
-- `sed` to delete the headers
+- `sed` to delete headers and more
+- `fgrep` to match SHA1
 - `cut` to cut fields
 - `tee` (optional) to duplicate the data stream
 - `pv` (optional) to monitor the progress of work
