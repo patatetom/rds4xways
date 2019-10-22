@@ -24,7 +24,7 @@ Except `pv` and `unzip`, all the above mentioned tools should be present in a Li
 
 ## Download and mount
 
-The full modern RDS Version 2.59 of December 2017 is [downloaded](https://www.nist.gov/itl/ssd/software-quality-group/nsrl-download/current-rds-hash-sets) (3,1 Gb) and used.
+The full modern RDS Version 2.66 of September 2019 is [downloaded](https://www.nist.gov/itl/ssd/software-quality-group/nsrl-download/current-rds-hash-sets) (4,5 Gb) and used.
 
 The content of the iso image `RDS_modern.iso` is made accessible through `/media/` :
 
@@ -36,13 +36,15 @@ mount -o ro ./RDS_modern.iso /media/
 
 ## Disk space
 
-Uncompaction of the archive `NSRLFile.txt.zip` would require 13.7 Gb of disk space for 112 182 782 records :
+Uncompaction of the archive `NSRLFile.txt.zip` would require 22,9 Gb of disk space for 183 887 294 records :
 
 ```bash
 unzip -p /media/NSRLFile.txt.zip | pv | wc
-13,7GiO 0:07:19 [  32MiB/s] [       <=>                               ]
-112182782 116433441 14740940496
+22,9GiO 0:12:16 [31,8MiB/s] [       <=>                               ]
+183887294 190698840 24578031458
 ```
+
+> `wc` results can be formated with `awk '{printf '${_:="\"%'d\""}',$1; printf " - "; printf '$_',$2; printf " - "; printf '$_',$3;}'` : `183 887 294 - 190 698 840 - 24 578 031 458`
 
 Extraction of strictly necessary data with reformatting will save some precious gigabytes.
 
@@ -57,8 +59,8 @@ The file `NSRLFile.txt` is structured as follows :
 ```bash
 unzip -p /media/NSRLFile.txt.zip | head -3
 "SHA-1","MD5","CRC32","FileName","FileSize","ProductCode","OpSystemCode","SpecialCode"
-"0000002D9D62AEBE1E0E9DB6C4C4C7C16A163D2C","1D6EBB5A789ABD108FF578263E1F40F3","FFFFFFFF","_sfx_0024._p",4109,11063,"358",""
-"0000004DA6391F7F5D2F7FCCF36CEBDA60C6EA02","0E53C14A3E48D94FF596A2824307B492","AA6A7B16","00br2026.gif",2226,8280,"358",""
+"000000206738748EDD92C4E3D2E823896700F849","392126E756571EBF112CB1C1CDEDF926","EBD105A0","I05002T2.PFB",98865,31639,"362",""
+"0000002D9D62AEBE1E0E9DB6C4C4C7C16A163D2C","1D6EBB5A789ABD108FF578263E1F40F3","FFFFFFFF","_sfx_0024._p",4109,11063,"362",""
 ```
 
 Only fields `SHA-1` and `ProductCode` are extracted from it :
@@ -66,14 +68,14 @@ Only fields `SHA-1` and `ProductCode` are extracted from it :
 ```bash
 # unzip -p /media/NSRLFile.txt.zip | sed 1d | ./csv2tsv | cut -f 1,6 | sort -u > nsrl
 unzip -p /media/NSRLFile.txt.zip | pv | sed 1d | ./csv2tsv | cut -f 1,6 | sort -u | tee nsrl | wc
-13,7GiO 0:29:56 [  7MiB/s] [          <=>                            ]
-104339754  208679508 4857127280
+22,9GiO 1:02:43 [6,23MiB/s] [          <=>                            ]
+171481177 342962354 8056732210
 ```
 ```bash
 head -3 nsrl 
+000000206738748edd92c4e3d2e823896700f849	31639
 0000002d9d62aebe1e0e9db6c4c4c7c16a163d2c	11063
 0000004da6391f7f5d2f7fccf36cebda60c6ea02	8280
-00000142988afa836117b1b572fae4713f200567	10463
 ```
 
 
@@ -83,7 +85,7 @@ head -3 nsrl
 ```bash
 # ( echo SHA-1; cut -f 1 nsrl | sort -u ) > sha1
 ( echo SHA-1; cut -f 1 nsrl | sort -u ) | tee sha1 | wc
-39599836 39599836 1623593241
+56058195 56058195 2298385960
 ```
 
 **According to X-Ways documentation** : *Now, important top tip follows: If you are creating your own hash file to import, perhaps from another forensic tool, and if you are using SHA-1, be sure to make sure your column heading in your source file is written exactly as "SHA-1" and not "SHA1" or "SHA" or "SHA 1".* ***It has to be "SHA-1", exactly, to be understood.***
@@ -91,11 +93,11 @@ head -3 nsrl
 ```bash
 head -3 sha1
 SHA-1
+000000206738748edd92c4e3d2e823896700f849
 0000002d9d62aebe1e0e9db6c4c4c7c16a163d2c
-0000004da6391f7f5d2f7fccf36cebda60c6ea02
 ```
 
-The file `sha1` weighs 1,6 Gb for 39 599 835 records.
+The file `sha1` weighs 2,2 Gb for 56 058 195 records.
 
 
 
@@ -109,14 +111,14 @@ Extensions used for the main image formats are searched :
 re='\.(jpg|jpeg|png|gif|bmp|svg|tif|psd|pcx)$'
 # unzip -p /media/NSRLFile.txt.zip | ./csv2tsv | cut -f 1,4 | egrep $re | cut -f 1 | sort -u > image.sha1
 unzip -p /media/NSRLFile.txt.zip | pv | ./csv2tsv | cut -f 1,4 | egrep $re | cut -f 1 | sort -u | tee image.sha1 | wc
-13,7GiO 0:37:49 [6,19MiB/s] [             <=>                         ]
-5265462 5265462 215883942
+22,9GiO 1:00:25 [6,25MiB/s] [             <=>                         ]
+7065680 7065680 289692880
 ```
 ```bash
 sed -i '1i SHA-1' image.sha1
 ```
 
-The file `image.sha1` weighs 206 Mb for 5 265 462 records (13%).
+The file `image.sha1` weighs 277 Mb for 7 065 680 records (~13%).
 
 
 
@@ -131,9 +133,9 @@ Extract manufacturer :
 ```
 ```bash
 cat microsoft
-3912	microsoft corporation
-609	microsoft
-610	microsoft game studios
+5804	microsoft corporation
+608	microsoft
+609	microsoft game studios
 ```
 
 Extract products :
@@ -141,15 +143,15 @@ Extract products :
 ```bash
 # ./csv2tsv < /media/NSRLProd.txt | cut -f 1,2,5 | fgrep -f <( cut -f 1 microsoft | sed 's/^/\t/g' ) > microsoft.product
 ./csv2tsv < /media/NSRLProd.txt | cut -f 1,2,5 | fgrep -f <( cut -f 1 microsoft | sed 's/^/\t/g' ) | tee microsoft.product | wc
-4020 26362 163827
+5603 40406 257223
 ```
 ```bash
 cat microsoft.product
-62	the compaq personal computer startup diskette	609
-62	the compaq personal computer startup diskette	609
-...
-184355	microsoft windows xp professional	609
-184355	microsoft windows xp professional	609
+62	the compaq personal computer startup diskette	608
+62	the compaq personal computer startup diskette	608
+…
+203345	2018-04 security only quality update for windows server 2012 r2 for x64 (kb4093115)	608
+203346	delta update for windows 10 for x86 (kb4093107)	608
 ```
 
 Extract SHA1 :
@@ -157,10 +159,10 @@ Extract SHA1 :
 ```bash
 # ( echo SHA-1; fgrep -f <( cut -f 1 microsoft.product | sed 's/^/\t/g' ) nsrl | cut -f 1 | sort -u ) > microsoft.sha1
 ( echo SHA-1; fgrep -f <( cut -f 1 microsoft.product | sed 's/^/\t/g' ) nsrl | cut -f 1 | sort -u ) | tee microsoft.sha1 | wc
-17553387 17553387 719688832
+23923977 23923977 980883022
 ```
 
-The file `microsoft.sha1` weighs 687 Mb for 17 553 386 records (44%).
+The file `microsoft.sha1` weighs 936 Mb for 23 923 976 records (~42%).
 
 
 
@@ -171,15 +173,15 @@ Extract operating systems :
 ```bash
 # ./csv2tsv < /media/NSRLOS.txt | cut -f 1,2,4 | fgrep -f <( cut -f 1 microsoft | sed 's/^/\t/g' ) > microsoft.os
 ./csv2tsv < /media/NSRLOS.txt | cut -f 1,2,4 | fgrep -f <( cut -f 1 microsoft | sed 's/^/\t/g' ) | tee microsoft.os | wc
-392 2403 12664
+437 2713 14379
 ```
 ```bash
 cat microsoft.os
-109	novel dos 7.0	609
-115	pcdos 5.0	609
-...
-934	windows 8 enterprise	609
-947	windows 10 ltsb	609
+1000	windows nt 3	608
+1001	windows 8 sp1 x64	608
+…
+994	windows 2003 sp2 x32	608
+995	windows 2003 sp2 x64	608
 ```
 
 Extract products :
@@ -187,15 +189,15 @@ Extract products :
 ```bash
 # ./csv2tsv < /media/NSRLProd.txt | cut -f 1,2,4 | fgrep -f <( cut -f 1 microsoft.os | sed 's/^/\t/g' ) > windows.product
 ./csv2tsv < /media/NSRLProd.txt | cut -f 1,2,4 | fgrep -f <( cut -f 1 microsoft.os | sed 's/^/\t/g' ) | tee windows.product | wc
-  27804  162979 1001782
+36716 217139 1352736
 ```
 ```bash
 cat windows.product
 9	pcanywhere	190
 9	pcanywhere	200
-...
-184362	matlab & simulink	237
-184363	oracle9i database release 2	189
+…
+204254	ue_4.22	189
+204255	jade empire	189
 ```
 
 Extract SHA1 :
@@ -203,10 +205,10 @@ Extract SHA1 :
 ```bash
 # ( echo SHA-1; fgrep -f <( cut -f 1 windows.product | sed 's/^/\t/g' ) nsrl | cut -f 1 | sort -u ) > windows.sha1
 ( echo SHA-1; fgrep -f <( cut -f 1 windows.product | sed 's/^/\t/g' ) nsrl | cut -f 1 | sort -u ) | tee windows.sha1 | wc
-35337414 35337414 1448833939
+49709221 49709221 2038078026
 ```
 
-The file `windows.sha1` weighs 1,4 Gb for 35 337 413 records (89%).
+The file `windows.sha1` weighs 1,9 Gb for 49 709 220 records (~88%).
 
 
 
