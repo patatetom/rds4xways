@@ -67,16 +67,18 @@ Only fields `SHA-1` and `ProductCode` are extracted from it :
 
 ```bash
 # unzip -p /media/NSRLFile.txt.zip | sed 1d | ./csv2tsv | cut -f 1,6 | sort -u > nsrl
-unzip -p /media/NSRLFile.txt.zip | pv | sed 1d | ./csv2tsv | cut -f 1,6 | sort -u | tee nsrl | wc
+unzip -p /media/NSRLFile.txt.zip | pv | sed 1d | ./csv2tsv | cut -f 1,6 | sed 's/$/x/g' | sort -u | tee nsrl | wc
 22,9GiO 1:02:43 [6,23MiB/s] [          <=>                            ]
-171481177 342962354 8056732210
+171481177 342962354 8228213387
 ```
 ```bash
 head -3 nsrl 
-000000206738748edd92c4e3d2e823896700f849	31639
-0000002d9d62aebe1e0e9db6c4c4c7c16a163d2c	11063
-0000004da6391f7f5d2f7fccf36cebda60c6ea02	8280
+000000206738748edd92c4e3d2e823896700f849	31639x
+0000002d9d62aebe1e0e9db6c4c4c7c16a163d2c	11063x
+0000004da6391f7f5d2f7fccf36cebda60c6ea02	8280x
 ```
+
+> the final character `x` is introduced for the later use of `fgrep`.
 
 
 
@@ -97,7 +99,7 @@ SHA-1
 0000002d9d62aebe1e0e9db6c4c4c7c16a163d2c
 ```
 
-The file `sha1` weighs 2,2 Gb for 56 058 195 records.
+The file `sha1` weighs 2,2 Gb for 56 058 194 records.
 
 
 
@@ -141,8 +143,8 @@ cat microsoft
 Extract products :
 
 ```bash
-# ./csv2tsv < /media/NSRLProd.txt | cut -f 1,2,5 | fgrep -f <( cut -f 1 microsoft | sed 's/^/\t/g' ) > microsoft.product
-./csv2tsv < /media/NSRLProd.txt | cut -f 1,2,5 | fgrep -f <( cut -f 1 microsoft | sed 's/^/\t/g' ) | tee microsoft.product | wc
+# ./csv2tsv < /media/NSRLProd.txt | cut -f 1,2,5 | grep -f <( cut -f 1 microsoft | sed -e 's/^/\t/g' -e 's/$/$/g' ) > microsoft.product
+./csv2tsv < /media/NSRLProd.txt | cut -f 1,2,5 | grep -f <( cut -f 1 microsoft | sed -e 's/^/\t/g' -e 's/$/$/g' ) | tee microsoft.product | wc
 5603 40406 257223
 ```
 ```bash
@@ -157,12 +159,12 @@ cat microsoft.product
 Extract SHA1 :
 
 ```bash
-# ( echo SHA-1; fgrep -f <( cut -f 1 microsoft.product | sed 's/^/\t/g' ) nsrl | cut -f 1 | sort -u ) > microsoft.sha1
-( echo SHA-1; fgrep -f <( cut -f 1 microsoft.product | sed 's/^/\t/g' ) nsrl | cut -f 1 | sort -u ) | tee microsoft.sha1 | wc
-23923977 23923977 980883022
+# ( echo SHA-1; fgrep -f <( cut -f 1 microsoft.product | sed -e 's/^/\t/g' -e 's/$/x/g' | sort -u ) nsrl | cut -f 1 | sort -u ) > microsoft.sha1
+( echo SHA-1; fgrep -f <( cut -f 1 microsoft.product | sed -e 's/^/\t/g' -e 's/$/x/g' | sort -u ) nsrl | cut -f 1 | sort -u ) | tee microsoft.sha1 | wc
+10994536 10994536 450775941
 ```
 
-The file `microsoft.sha1` weighs 936 Mb for 23 923 976 records (~42%).
+The file `microsoft.sha1` weighs 430 Mb for 10 994 535 records (~19%).
 
 
 
@@ -171,8 +173,8 @@ The file `microsoft.sha1` weighs 936 Mb for 23 923 976 records (~42%).
 Extract operating systems :
 
 ```bash
-# ./csv2tsv < /media/NSRLOS.txt | cut -f 1,2,4 | fgrep -f <( cut -f 1 microsoft | sed 's/^/\t/g' ) > microsoft.os
-./csv2tsv < /media/NSRLOS.txt | cut -f 1,2,4 | fgrep -f <( cut -f 1 microsoft | sed 's/^/\t/g' ) | tee microsoft.os | wc
+# ./csv2tsv < /media/NSRLOS.txt | cut -f 1,2,4 | grep -f <( cut -f 1 microsoft | sed -e 's/^/\t/g' -e 's/$/$/g' ) > microsoft.os
+./csv2tsv < /media/NSRLOS.txt | cut -f 1,2,4 | grep -f <( cut -f 1 microsoft | sed -e 's/^/\t/g' -e 's/$/$/g' ) | tee microsoft.os | wc
 437 2713 14379
 ```
 ```bash
@@ -187,9 +189,9 @@ cat microsoft.os
 Extract products :
 
 ```bash
-# ./csv2tsv < /media/NSRLProd.txt | cut -f 1,2,4 | fgrep -f <( cut -f 1 microsoft.os | sed 's/^/\t/g' ) > windows.product
-./csv2tsv < /media/NSRLProd.txt | cut -f 1,2,4 | fgrep -f <( cut -f 1 microsoft.os | sed 's/^/\t/g' ) | tee windows.product | wc
-36716 217139 1352736
+# ./csv2tsv < /media/NSRLProd.txt | cut -f 1,2,4 | grep -f <( cut -f 1 microsoft.os | sed -e 's/^/\t/g' -e 's/$/$/g' ) > windows.product
+./csv2tsv < /media/NSRLProd.txt | cut -f 1,2,4 | grep -f <( cut -f 1 microsoft.os | sed -e 's/^/\t/g' -e 's/$/$/g' ) | tee windows.product | wc
+34958 207759 1295619
 ```
 ```bash
 cat windows.product
@@ -203,12 +205,12 @@ cat windows.product
 Extract SHA1 :
 
 ```bash
-# ( echo SHA-1; fgrep -f <( cut -f 1 windows.product | sed 's/^/\t/g' ) nsrl | cut -f 1 | sort -u ) > windows.sha1
-( echo SHA-1; fgrep -f <( cut -f 1 windows.product | sed 's/^/\t/g' ) nsrl | cut -f 1 | sort -u ) | tee windows.sha1 | wc
-49709221 49709221 2038078026
+# ( echo SHA-1; fgrep -f <( cut -f 1 windows.product | sed -e 's/^/\t/g' -e 's/$/x/g' | sort -u ) nsrl | cut -f 1 | sort -u ) > windows.sha1
+( echo SHA-1; fgrep -f <( cut -f 1 windows.product | sed -e 's/^/\t/g' -e 's/$/x/g' | sort -u ) nsrl | cut -f 1 | sort -u ) | tee windows.sha1 | wc
+34615489 34615489 1419235014
 ```
 
-The file `windows.sha1` weighs 1,9 Gb for 49 709 220 records (~88%).
+The file `windows.sha1` weighs 1,4 Gb for 34 615 488 records (~61%).
 
 
 
