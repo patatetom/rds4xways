@@ -40,11 +40,11 @@ Uncompaction of the archive `NSRLFile.txt.zip` would require 22,9 Gb of disk spa
 
 ```bash
 unzip -p /media/NSRLFile.txt.zip | pv | wc
-22,9GiO 0:12:16 [31,8MiB/s] [       <=>                               ]
-183887294 190698840 24578031458
+15GiO 0:05:47 [31,8MiB/s] [       <=>                               ]
+114812390 116049259 16071653636
 ```
 
-> `wc` results can be formated with `awk '{printf '${_:="\"%'d\""}',$1; printf " - "; printf '$_',$2; printf " - "; printf '$_',$3;}'` : `183 887 294 - 190 698 840 - 24 578 031 458`
+> `wc` results can be formated with `awk '{printf '${_:="\"%'d\""}',$1; printf " - "; printf '$_',$2; printf " - "; printf '$_',$3;}'` : `114 812 390 - 116 049 259 - 16 071 653 636`
 
 Extraction of strictly necessary data with reformatting will save some precious gigabytes.
 
