@@ -19,7 +19,7 @@ Extraction of SHA1 sets from [Reference Data Set](https://www.nist.gov/itl/ssd/s
 - `wc` to do some counts
 
 Except `pv`, `tee` and `unzip`, all the above mentioned tools should be present in a Linux distribution.
-If `pv` and `tee` installation is optional, `unzip` installation is required.
+If the use and thus the installation of `pv` and `tee` is optional, the installation of `unzip` is required.
 
 
 
