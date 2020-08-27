@@ -231,3 +231,9 @@ Images can be reduced to Microsoft or Windows with the use of `comm` :
 comm -1 -2 microsoft.sha1 image.sha1 > image.microsoft.sha1
 comm -1 -2 windows.sha1 image.sha1 > image.windows.sha1
 ```
+
+
+
+## See also
+
+- [Testing the National Software Reference Library](https://www.sciencedirect.com/science/article/pii/S1742287612000345)
