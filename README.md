@@ -19,6 +19,7 @@ Extraction of SHA1 sets from [Reference Data Set](https://www.nist.gov/itl/ssd/s
 - `wc` (optional) to do some counts
 
 Except `pv` and `unzip`, all the above mentioned tools should be present in a Linux distribution.
+If `pv` installation is optional, `unzip` installation is required.
 
 
 
