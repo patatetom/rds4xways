@@ -12,7 +12,7 @@ Extraction of SHA1 sets from [Reference Data Set](https://www.nist.gov/itl/ssd/s
 - `unzip` to extract to stdout
 - `python2` to convert files format and preserve some space
 - `sed` to add/delete headers and more
-- `fgrep` to match fixed strings
+- `egrep`, `fgrep` and `grep` to match strings
 - `cut` to cut fields
 - `tee` (optional) to duplicate the data stream
 - `pv` (optional) to monitor the progress of work
