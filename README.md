@@ -70,14 +70,14 @@ Only fields `SHA-1` and `ProductCode` are extracted from it :
 ```bash
 # unzip -p /media/NSRLFile.txt.zip | sed 1d | ./csv2tsv | cut -f 1,6 | sed 's/$/x/g' | sort -u | tee nsrl | wc
 unzip -p /media/NSRLFile.txt.zip | pv | sed 1d | ./csv2tsv | cut -f 1,6 | sed 's/$/x/g' | sort -u | tee nsrl | wc
-22,9GiO 1:02:43 [6,23MiB/s] [          <=>                            ]
-171481177 342962354 8228213387
+15GiO 0:33:41 [6,23MiB/s] [          <=>                            ]
+108170733 216341466 5285694740
 ```
 ```bash
-head -3 nsrl 
-000000206738748edd92c4e3d2e823896700f849	31639x
-0000002d9d62aebe1e0e9db6c4c4c7c16a163d2c	11063x
-0000004da6391f7f5d2f7fccf36cebda60c6ea02	8280x
+head -3 nsrl
+00000079fd7aac9b2f9c988c50750e1f50b27eb5	190718x
+00000079fd7aac9b2f9c988c50750e1f50b27eb5	190719x
+00000079fd7aac9b2f9c988c50750e1f50b27eb5	190721x
 ```
 
 > the final character `x` is introduced for the later use of `fgrep`.
