@@ -14,12 +14,12 @@ Extraction of SHA1 sets from [Reference Data Set](https://www.nist.gov/itl/ssd/s
 - `sed` to add/delete headers and more
 - `egrep`, `fgrep` and `grep` to match strings
 - `cut` to cut fields
-- `tee` (optional) to duplicate the data stream
-- `pv` (optional) to monitor the progress of work
-- `wc` (optional) to do some counts
+- `tee` to duplicate the data stream
+- `pv` to monitor the progress of work
+- `wc` to do some counts
 
-Except `pv` and `unzip`, all the above mentioned tools should be present in a Linux distribution.
-If `pv` installation is optional, `unzip` installation is required.
+Except `pv`, `tee` and `unzip`, all the above mentioned tools should be present in a Linux distribution.
+If `pv` and `tee` installation is optional, `unzip` installation is required.
 
 
 
