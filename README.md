@@ -39,6 +39,7 @@ mount -o ro ./RDS_modern.iso /media/
 Uncompaction of the archive `NSRLFile.txt.zip` would require 22,9 Gb of disk space for 183 887 293 records :
 
 ```bash
+# unzip -p /media/NSRLFile.txt.zip | wc
 unzip -p /media/NSRLFile.txt.zip | pv | wc
 15GiO 0:05:47 [31,8MiB/s] [       <=>                               ]
 114812390 116049259 16071653636
@@ -66,7 +67,7 @@ unzip -p /media/NSRLFile.txt.zip | head -3
 Only fields `SHA-1` and `ProductCode` are extracted from it :
 
 ```bash
-# unzip -p /media/NSRLFile.txt.zip | sed 1d | ./csv2tsv | cut -f 1,6 | sort -u > nsrl
+# unzip -p /media/NSRLFile.txt.zip | sed 1d | ./csv2tsv | cut -f 1,6 | sed 's/$/x/g' | sort -u | tee nsrl | wc
 unzip -p /media/NSRLFile.txt.zip | pv | sed 1d | ./csv2tsv | cut -f 1,6 | sed 's/$/x/g' | sort -u | tee nsrl | wc
 22,9GiO 1:02:43 [6,23MiB/s] [          <=>                            ]
 171481177 342962354 8228213387
