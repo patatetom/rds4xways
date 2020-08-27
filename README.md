@@ -1,6 +1,6 @@
 # rds4xways
 
-Extraction of SHA1 sets from [Reference Data Set](https://www.nist.gov/itl/ssd/software-quality-group/nsrl-download/current-rds-hash-sets) (RDS) provided by the [National Software Reference Library](https://www.nist.gov/software-quality-group/national-software-reference-library-nsrl) (NSRL) for X-Ways Forensics.
+Extraction of SHA1 sets from [Reference Data Set](https://www.nist.gov/itl/ssd/software-quality-group/national-software-reference-library-nsrl/about-nsrl) (RDS) provided by the [National Software Reference Library](https://www.nist.gov/itl/ssd/software-quality-group/national-software-reference-library-nsrl) (NSRL) for X-Ways Forensics.
 
 
 ## Prerequisites
@@ -24,7 +24,7 @@ Except `pv` and `unzip`, all the above mentioned tools should be present in a Li
 
 ## Download and mount
 
-The full modern RDS Version 2.66 of September 2019 is [downloaded](https://www.nist.gov/itl/ssd/software-quality-group/nsrl-download/current-rds-hash-sets) (4,5 Gb) and used.
+The full modern RDS Version 2.69 of June 2020 is [downloaded](https://www.nist.gov/itl/ssd/software-quality-group/national-software-reference-library-nsrl/nsrl-download/current-rds) (2,5 Gb) and used.
 
 The content of the iso image `RDS_modern.iso` is made accessible through `/media/` :
 
