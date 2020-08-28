@@ -109,17 +109,16 @@ The file `sha1` weighs 1,2 Gb for 29 459 432 records.
 Extensions used for the main image formats are searched :
 
 ```bash
-re='\.(jpg|jpeg|png|gif|bmp|svg|tif|psd|pcx)$'
-# unzip -p /media/NSRLFile.txt.zip | ./csv2tsv | cut -f 1,4 | egrep $re | cut -f 1 | sort -u > image.sha1
+re='\.(jpg|jpeg|png|gif|bmp|svg|tif|psd|pcx|webp)$'
 unzip -p /media/NSRLFile.txt.zip | pv | ./csv2tsv | cut -f 1,4 | egrep $re | cut -f 1 | sort -u | tee image.sha1 | wc
-22,9GiO 1:00:25 [6,25MiB/s] [             <=>                         ]
-7065680 7065680 289692880
+15GiO 0:16:47 [6,25MiB/s] [             <=>                         ]
+1335405 1335405 54751605
 ```
 ```bash
 sed -i '1i SHA-1' image.sha1
 ```
 
-The file `image.sha1` weighs 277 Mb for 7 065 680 records (~13%).
+The file `image.sha1` weighs 53 Mb for 1 335 405 records (~4%).
 
 
 
