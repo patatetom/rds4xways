@@ -127,7 +127,6 @@ The file `image.sha1` weighs 53 Mb for 1 335 405 records (~4%).
 Extract manufacturer :
 
 ```bash
-# ./csv2tsv < /media/NSRLMfg.txt | grep microsoft > microsoft
 ./csv2tsv < /media/NSRLMfg.txt | grep microsoft | tee microsoft | wc
 3 9 68
 ```
@@ -141,28 +140,26 @@ cat microsoft
 Extract products :
 
 ```bash
-# ./csv2tsv < /media/NSRLProd.txt | cut -f 1,2,5 | grep -f <( cut -f 1 microsoft | sed -e 's/^/\t/g' -e 's/$/$/g' ) > microsoft.product
 ./csv2tsv < /media/NSRLProd.txt | cut -f 1,2,5 | grep -f <( cut -f 1 microsoft | sed -e 's/^/\t/g' -e 's/$/$/g' ) | tee microsoft.product | wc
-5603 40406 257223
+3264 27202 179692
 ```
 ```bash
 cat microsoft.product
 62	the compaq personal computer startup diskette	608
 62	the compaq personal computer startup diskette	608
 …
-203345	2018-04 security only quality update for windows server 2012 r2 for x64 (kb4093115)	608
-203346	delta update for windows 10 for x86 (kb4093107)	608
+214741	skype for desktop	608
+214741	skype for desktop	608
 ```
 
 Extract SHA1 :
 
 ```bash
-# ( echo SHA-1; fgrep -f <( cut -f 1 microsoft.product | sed -e 's/^/\t/g' -e 's/$/x/g' | sort -u ) nsrl | cut -f 1 | sort -u ) > microsoft.sha1
 ( echo SHA-1; fgrep -f <( cut -f 1 microsoft.product | sed -e 's/^/\t/g' -e 's/$/x/g' | sort -u ) nsrl | cut -f 1 | sort -u ) | tee microsoft.sha1 | wc
-10994536 10994536 450775941
+7402919 7402919 303519644
 ```
 
-The file `microsoft.sha1` weighs 430 Mb for 10 994 535 records (~19%).
+The file `microsoft.sha1` weighs 290 Mb for 7 402 918 records (~25%).
 
 
 
