@@ -37,7 +37,7 @@ mount -o ro ./RDS_modern.iso /media/
 
 ## Disk space
 
-Uncompaction of the archive `NSRLFile.txt.zip` would require 22,9 Gb of disk space for 183 887 293 records :
+Uncompaction of the archive `NSRLFile.txt.zip` would require 15 Gb of disk space for 114 812 389 records :
 
 ```bash
 unzip -p /media/NSRLFile.txt.zip | pv | wc
