@@ -68,8 +68,6 @@ da39a3ee5e6b4b0d3255bfef95601890afd80709  /sources/install.wim
 # 11/11 Windows 10 Pro N for Workstations
 ```
 
-`hashwiniso` can be less verbose with `hashwiniso /run/media/patatetom/IMAGE_LABEL | tee image.file.iso.sha1sums | grep '^#'`.
-
 > `Pro` versions are not collected (see [hashwiniso source code](hashwiniso) to change this behavior);
 > 
 > hash algorithm can be easily modified (see [hashwiniso source code](hashwiniso) to change hash algorithm);
