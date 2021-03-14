@@ -30,3 +30,39 @@ patateom@linux:~$ udisksctl loop-setup -f /path/to/image.file.iso
 patateom@linux:~$ # or
 patateom@linux:~$ sudo mount /path/to/image.file.iso /mount/point/
 ```
+
+- get informations :
+
+```console
+patateom@linux:~$ mount | grep /path/to/image.file.iso
+/path/to/image.file.iso on /run/media/patatetom/IMAGE_LABEL type udf (ro,nosuid,nodev,relatime,uid=1000,gid=1000,iocharset=utf8,uhelper=udisks2)
+```
+
+- start collecting :
+
+```console
+patateom@linux:~$ hashwiniso /run/media/patatetom/IMAGE_LABEL | tee image.file.iso.sha1sums
+# hashing '/path/to/image.file.iso'...
+da39a3ee5e6b4b0d3255bfef95601890afd80709  /path/to/image.file.iso
+# hashing files in '/run/media/patatetom/IMAGE_LABEL'...
+…
+# hashing files in '/sources/boot.wim'...
+# 1/2 Microsoft Windows PE (x64)
+…
+# 2/2 Microsoft Windows Setup (x64)
+…
+# hashing files in '/sources/install.wim'...
+# 1/11 Windows 10 Home
+…
+# 5/11 Windows 10 Education N
+…
+# 6/11 Windows 10 Pro
+# 7/11 Windows 10 Pro N
+# 8/11 Windows 10 Pro Education
+# 9/11 Windows 10 Pro Education N
+# 10/11 Windows 10 Pro for Workstations
+# 11/11 Windows 10 Pro N for Workstations
+```
+
+> Note that `Pro` versions are not collected (see [hashwiniso source code](hashwiniso) to change this behavior).
+
