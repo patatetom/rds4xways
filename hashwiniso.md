@@ -66,6 +66,7 @@ da39a3ee5e6b4b0d3255bfef95601890afd80709  /sources/install.wim
 # 9/11 Windows 10 Pro Education N
 # 10/11 Windows 10 Pro for Workstations
 # 11/11 Windows 10 Pro N for Workstations
+# done
 ```
 
 > `Pro` versions are not collected (see [hashwiniso source code](hashwiniso#L110) to change this behavior);
