@@ -67,7 +67,7 @@ for line in sys.stdin:
 
 # temporary directory and garbage collector 
 wim_point=$( mktemp -d )
-trap "fusermount -u -z $wim_point &> /dev/null; rmdir $wim_point" exit
+trap "fusermount -u -z $wim_point &> /dev/null || true; rmdir $wim_point" exit
 
 # firstly, the ISO image
 echo "# hashing '$disk_image'..."
