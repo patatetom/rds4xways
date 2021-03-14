@@ -70,6 +70,6 @@ da39a3ee5e6b4b0d3255bfef95601890afd80709  /sources/install.wim
 
 > `Pro` versions are not collected (see [hashwiniso source code](hashwiniso#L110) to change this behavior);
 > 
-> hash algorithm can be easily modified (see [hashwiniso source code](hashwiniso) to change hash algorithm);
+> hash algorithm can be easily modified (see [hashwiniso source code](hashwiniso#L18) to change hash algorithm);
 > 
 > a warning will be displayed if the standard output of the script is not captured/redirected.
