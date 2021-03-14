@@ -16,6 +16,17 @@ With the exception of [wimlib](https://github.com/ebiggers/wimlib) which must be
 - try it :
 
 ```console
-$ hashwiniso 
+patateom@linux:~$ hashwiniso 
 usage: hashwiniso mount_point
+```
+
+
+## Usage
+
+- mount the ISO image disk :
+
+```console
+patateom@linux:~$ udisksctl loop-setup -f /path/to/image.file.iso
+patateom@linux:~$ # or
+patateom@linux:~$ sudo mount /path/to/image.file.iso /mount/point/
 ```
