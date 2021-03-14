@@ -116,3 +116,5 @@ do
 	done
 done
 
+# end of process marker
+echo "# done"
