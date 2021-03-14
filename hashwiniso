@@ -1,0 +1,118 @@
+#!/bin/bash
+
+# you can get lastest Windows ISO here (use Firefox or Chrome, not Edge) :
+# https://www.microsoft.com/en-us/software-download/windows10ISO
+# you can retrieve old Windows ISO here (not a Microsoft site) :
+# https://tb.rg-adguard.net/
+
+# dependencies : except wimlib (for WIM files), all others binaries should
+# be in your Linux
+
+# as user, ISO image can be mounted for example with
+#  sudo mount file.iso /mount/point/
+# or
+#  udisksctl loop-setup -f file.iso
+
+set -eu
+
+# binary hashing
+# hash{space}{space}]filename is expected
+hash_bin=sha1sum
+#hash_bin=sha256sum
+#hash_bin=sha512sum
+
+# checks mount point argument
+( [ "${1:-x}" == "x" ] || [ "${2:-x}" != "x" ] ) &&
+	echo "$( basename $0 ) mount_point" > /dev/stderr &&
+		exit -1
+
+# real path (eg. symlink)
+mount_point=$( readlink -f "$1" )
+
+# checks mount point
+[ -f "$mount_point" ] &&
+	echo "'$mount_point' is not a directory" > /dev/stderr &&
+		exit -2
+[ ! -d "$mount_point" ] &&
+	echo "'$mount_point' does not exist" > /dev/stderr &&
+		exit -2
+[ ! -r "$mount_point" ] &&
+	echo "'$mount_point' is unreadable" > /dev/stderr &&
+		exit -2
+
+disk_image=$( mount | grep "$mount_point" | sed 's/ on .*//' )
+
+# checks ISO image
+[ ! "$disk_image" ] &&
+	echo "'$mount_point' has no association" > /dev/stderr &&
+		exit -3
+[ ! -f "$disk_image" ] &&
+	echo "'$disk_image' does not exist" > /dev/stderr &&
+		exit -3
+
+# warning if no stdout redirection (eg. hashwiniso win.iso | tee win.iso.sha1)
+[ -t 1 ] &&
+	echo -n "stdout is not redirected : continue ?" > /dev/stderr &&
+		read -s &&
+			echo
+
+# "sed like" but with fixed strings
+psed(){
+	python -u -c "
+import sys
+for line in sys.stdin:
+	print(line.strip().replace('$1', '$2'))
+"
+}
+
+# temporary directory and garbage collector 
+wim_point=$( mktemp -d )
+trap "fusermount -u -z $wim_point &> /dev/null; rmdir $wim_point" exit
+
+# firstly, the ISO image
+echo "# hashing '$disk_image'..."
+$hash_bin "$disk_image" |
+# $disk_image can contain "reserved" characters (regex)
+psed "  $disk_image" "\t$( basename "$disk_image")"
+
+# then, the files on the ISO image
+echo "# hashing files in '$mount_point'..."
+find "$mount_point" -type f -exec $hash_bin '{}' \; |
+psed "  $mount_point" "\t" |
+# NTFS is not case sensitive
+tr '[:upper:]' '[:lower:]'
+
+# find all WIM files
+wim_list=$(
+	find "$mount_point" -type f -name '*.wim' |
+	psed "$mount_point" ""
+)
+
+# and finally, all the files present in the different images embedded
+# into the WIM files found
+for wim_file in $wim_list
+do
+	echo "# hashing files in '$wim_file'..."
+	count=$(
+		./wimlib info "$mount_point/$wim_file" |
+		egrep '^Image Count: +[0-9]+$' |
+		egrep -o '[0-9]+$'
+	)
+	for index in $( seq $count )
+	do
+		name=$(
+			./wimlib info "$mount_point/$wim_file" $index |
+			grep '^Name: ' |
+			sed "s;^Name: \+;# $index/$count ;"
+		)
+		echo $name
+		./wimlib mount "$mount_point/$wim_file" $index $wim_point
+		# comment next line if you want to hash Windows Pro files
+		[[ ! "${name,,}" =~ "pro" ]] &&
+		find $wim_point/ -type f -exec $hash_bin '{}' \; |
+		psed "  $wim_point" "\t" |
+		tr '[:upper:]' '[:lower:]'
+		fusermount -u $wim_point
+	done
+done
+
