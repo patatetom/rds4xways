@@ -5,7 +5,7 @@ Automatic extraction of SHA1 sets from a Microsoft Windows ISO image and the WIM
 
 ## Prerequisites
 
-With the exception of [wimlib](https://github.com/ebiggers/wimlib) which must be installed/present to process WIM files, all other binaries should be in your Linux.
+With the exception of [wimlib](https://github.com/ebiggers/wimlib) which must be installed/present to process WIM files, all other binaries used by [hashwiniso](hashwiniso) should be in your Linux.
 
 
 ## Installation
