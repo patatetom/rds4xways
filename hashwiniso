@@ -23,7 +23,7 @@ hash_bin=sha1sum
 
 # checks mount point argument
 ( [ "${1:-x}" == "x" ] || [ "${2:-x}" != "x" ] ) &&
-	echo "$( basename $0 ) mount_point" > /dev/stderr &&
+	echo "usage: $( basename $0 ) mount_point" > /dev/stderr &&
 		exit -1
 
 # real path (eg. symlink)
