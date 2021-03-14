@@ -13,7 +13,7 @@ With the exception of [wimlib](https://github.com/ebiggers/wimlib) which must be
 - download [hashwiniso](https://raw.githubusercontent.com/patatetom/rds4xways/master/hashwiniso) (in one of the folders defined in your `PATH` variable) 
 - check it (with `(bat||less)</path/to/hashwiniso`)
 - make it executable (with `chmod +x /path/to/hashwiniso`)
-- try it without argument :
+- try it :
 
 ```console
 $ hashwiniso 
