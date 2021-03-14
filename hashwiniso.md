@@ -10,6 +10,6 @@ Except [wimlib](https://github.com/ebiggers/wimlib) (for the WIM files), all oth
 
 ## Installation
 
-- download [hashwiniso](hashwiniso) (in one of the folders defined in your `PATH` variable) 
+- download [hashwiniso](https://raw.githubusercontent.com/patatetom/rds4xways/master/hashwiniso) (in one of the folders defined in your `PATH` variable) 
 - check it (with `(bat||less) /path/to/hashwiniso`)
 - make it executable (with `chmod +x /path/to/hashwiniso`)
