@@ -38,7 +38,7 @@ patateom@linux:~$ mount | grep /path/to/image.file.iso
 /path/to/image.file.iso on /run/media/patatetom/IMAGE_LABEL type udf (ro,nosuid,nodev,relatime,uid=1000,gid=1000,iocharset=utf8,uhelper=udisks2)
 ```
 
-- start collecting :
+- collect digital footprints :
 
 ```console
 patateom@linux:~$ hashwiniso /run/media/patatetom/IMAGE_LABEL | tee image.file.iso.sha1sums
@@ -73,3 +73,12 @@ da39a3ee5e6b4b0d3255bfef95601890afd80709  /sources/install.wim
 > hash algorithm can be easily modified (see [hashwiniso source code](hashwiniso#L18) to change hash algorithm);
 > 
 > a warning will be displayed if the standard output of the script is not captured/redirected.
+
+```console
+patateom@linux:~$ grep -v '^#' image.file.iso.sha1sums | wc -l
+501903
+patateom@linux:~$ grep -v '^#' image.file.iso.sha1sums | sort -u | wc -l
+106574
+patateom@linux:~$  grep -v '^#' image.file.iso.sha1sums | cut -f 1 | sort -u | wc -l
+69340
+```
