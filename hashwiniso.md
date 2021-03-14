@@ -46,6 +46,10 @@ patateom@linux:~$ hashwiniso /run/media/patatetom/IMAGE_LABEL | tee image.file.i
 da39a3ee5e6b4b0d3255bfef95601890afd80709  /path/to/image.file.iso
 # hashing files in '/run/media/patatetom/IMAGE_LABEL'...
 …
+da39a3ee5e6b4b0d3255bfef95601890afd80709  /sources/boot.wim
+…
+da39a3ee5e6b4b0d3255bfef95601890afd80709  /sources/install.wim
+…
 # hashing files in '/sources/boot.wim'...
 # 1/2 Microsoft Windows PE (x64)
 …
@@ -64,5 +68,10 @@ da39a3ee5e6b4b0d3255bfef95601890afd80709  /path/to/image.file.iso
 # 11/11 Windows 10 Pro N for Workstations
 ```
 
-> Note that `Pro` versions are not collected (see [hashwiniso source code](hashwiniso) to change this behavior).
+`hashwiniso` can be less verbose with `hashwiniso /run/media/patatetom/IMAGE_LABEL | tee image.file.iso.sha1sums | grep '^#'`.
 
+> `Pro` versions are not collected (see [hashwiniso source code](hashwiniso) to change this behavior);
+> 
+> hash algorithm can be easily modified (see [hashwiniso source code](hashwiniso) to change hash algorithm);
+> 
+> a warning will be displayed if the standard output of the script is not captured/redirected.
