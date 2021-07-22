@@ -4,6 +4,8 @@
 # https://www.microsoft.com/en-us/software-download/windows10ISO
 # you can retrieve old Windows ISO here (not a Microsoft site) :
 # https://tb.rg-adguard.net/
+# you can also have a look here :
+# https://github.com/pbatard/Fido
 
 # dependencies : except wimlib (for WIM files), all others binaries should
 # be in your Linux
