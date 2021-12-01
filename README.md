@@ -114,14 +114,14 @@ Extensions used for the main image formats are searched :
 ```bash
 re='\.(jpg|jpeg|jfif|jif|jp2|jpx|j2k|j2c|png|gif|bmp|svg|tif|tiff|psd|pcx|webp|psd|emf|wmf)$'
 unzip -p /media/NSRLFile.txt.zip | pv | ./csv2tsv | cut -f 1,4 | egrep $re | cut -f 1 | sort -u | tee image.sha1 | wc
-15GiO 0:16:47 [6,25MiB/s] [             <=>                         ]
-1335405 1335405 54751605
+25,0GiO 0:13:06 [32,5MiO/s] [           <=>                         ]
+1647740 1647740 67557340
 ```
 ```bash
 sed -i '1i SHA-1' image.sha1
 ```
 
-The file `image.sha1` weighs 53 Mb for 1 335 405 records (~4%).
+The file `image.sha1` weighs 65 Mb for 1 647 740 records (~4%).
 
 
 
