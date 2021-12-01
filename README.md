@@ -25,7 +25,7 @@ If the use and thus the installation of `pv` and `tee` is optional, the installa
 
 ## Download and mount
 
-The full modern RDS Version 2.69 of June 2020 is [downloaded](https://www.nist.gov/itl/ssd/software-quality-group/national-software-reference-library-nsrl/nsrl-download/current-rds) (2,5 Gb) and used.
+The full modern RDS Version 2.74 of september 2021 is [downloaded](https://www.nist.gov/itl/ssd/software-quality-group/national-software-reference-library-nsrl/nsrl-download/current-rds) (3,4 Gb) and used.
 
 The content of the iso image `RDS_modern.iso` is made accessible through `/media/` :
 
