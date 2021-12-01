@@ -172,7 +172,7 @@ Extract operating systems :
 
 ```bash
 ./csv2tsv < /media/NSRLOS.txt | cut -f 1,2,4 | grep -f <( cut -f 1 microsoft | sed -e 's/^/\t/g' -e 's/$/$/g' ) | tee microsoft.os | wc
-445 2777 14722
+475 2967 15807
 ```
 ```bash
 cat microsoft.os
@@ -187,25 +187,25 @@ Extract products :
 
 ```bash
 ./csv2tsv < /media/NSRLProd.txt | cut -f 1,2,4 | grep -f <( cut -f 1 microsoft.os | sed -e 's/^/\t/g' -e 's/$/$/g' ) | tee windows.product | wc
-18982 109498 700111
+30745 184784 1199154
 ```
 ```bash
 cat windows.product
 62	the compaq personal computer startup diskette	56
 62	the compaq personal computer startup diskette	56
 …
-215906	creator nxt 7 - esd	772
-215933	zoom client for windows	189
+242090	farming simulator 19	189
+242202	the crew 2 - standard edition	189
 ```
 
 Extract SHA1 :
 
 ```bash
 ( echo SHA-1; fgrep -f <( cut -f 1 windows.product | sed -e 's/^/\t/g' -e 's/$/x/g' | sort -u ) nsrl | cut -f 1 | sort -u ) | tee windows.sha1 | wc
-16402601 16402601 672506606
+21081420 21081420 864338185
 ```
 
-The file `windows.sha1` weighs 642 Mb for 16 402 600 records (~55%).
+The file `windows.sha1` weighs 825 Mb for 21 081 419 records (~55%).
 
 
 
