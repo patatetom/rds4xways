@@ -89,7 +89,7 @@ head -3 nsrl
 
 ```bash
 ( echo SHA-1; cut -f 1 nsrl | sort -u ) | tee sha1 | wc
-29459433 29459433 1207836718
+38320335 38320335 1571133700
 ```
 
 **According to X-Ways documentation** : *Now, important top tip follows: If you are creating your own hash file to import, perhaps from another forensic tool, and if you are using SHA-1, be sure to make sure your column heading in your source file is written exactly as "SHA-1" and not "SHA1" or "SHA" or "SHA 1".* ***It has to be "SHA-1", exactly, to be understood.***
@@ -97,11 +97,11 @@ head -3 nsrl
 ```bash
 head -3 sha1
 SHA-1
-00000079fd7aac9b2f9c988c50750e1f50b27eb5
-000000f694ca9bf73836d67deb5e2724338b422d
+0000001ffef4be312bab534eca7aeaa3e4684d85
+00000052a9eeec6c8348cfb2aea77bc1fbf8d239
 ```
 
-The file `sha1` weighs 1,2 Gb for 29 459 432 records.
+The file `sha1` weighs 1,5 Gb for 38 320 335 records.
 
 
 
