@@ -68,17 +68,17 @@ Only fields `SHA-1` and `ProductCode` are extracted from it :
 
 ```bash
 unzip -p /media/NSRLFile.txt.zip | pv | sed 1d | ./csv2tsv | cut -f 1,6 | sed 's/$/x/g' | sort -u | tee nsrl | wc
-15GiO 0:33:41 [6,23MiB/s] [          <=>                            ]
-108170733 216341466 5285694740
+25,0GiO 0:13:55 [30,6MiO/s] [        <=>                            ]
+182753918 365507836 8938968303
 ```
 
 > the `sort -u` command used above can quickly run out of space when the `/tmp/` folder is mounted in memory : use its `-T /somedir/` option or the `$TMPDIR` environment variable in this case.
 
 ```bash
 head -3 nsrl
+0000001ffef4be312bab534eca7aeaa3e4684d85	219181x
+00000052a9eeec6c8348cfb2aea77bc1fbf8d239	218747x
 00000079fd7aac9b2f9c988c50750e1f50b27eb5	190718x
-00000079fd7aac9b2f9c988c50750e1f50b27eb5	190719x
-00000079fd7aac9b2f9c988c50750e1f50b27eb5	190721x
 ```
 
 > the final character `x` is introduced for the later use of `fgrep`.
