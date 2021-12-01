@@ -37,15 +37,15 @@ mount -o ro ./RDS_modern.iso /media/
 
 ## Disk space
 
-Uncompaction of the archive `NSRLFile.txt.zip` would require 15 Gb of disk space for 114 812 389 records :
+Uncompaction of the archive `NSRLFile.txt.zip` would require 25 Gb of disk space for 192 677 750 records :
 
 ```bash
 unzip -p /media/NSRLFile.txt.zip | pv | wc
-15GiO 0:05:47 [31,8MiB/s] [       <=>                               ]
-114812390 116049259 16071653636
+25,0GiO 0:02:18 [ 184MiO/s] [     <=>                               ]
+192677750 194541093 26804404409
 ```
 
-> `wc` results can be formated with `awk '{printf '${_:="\"%'d\""}',$1; printf " - "; printf '$_',$2; printf " - "; printf '$_',$3;}'` : `114 812 390 - 116 049 259 - 16 071 653 636`
+> `wc` results can be formated with `| printf "%'d - %'d - %'d" $( cat )` : `192 677 750 - 194 541 093 - 26 804 404 409`
 
 Extraction of strictly necessary data with reformatting will save some precious gigabytes.
 
