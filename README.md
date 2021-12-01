@@ -71,6 +71,9 @@ unzip -p /media/NSRLFile.txt.zip | pv | sed 1d | ./csv2tsv | cut -f 1,6 | sed 's
 15GiO 0:33:41 [6,23MiB/s] [          <=>                            ]
 108170733 216341466 5285694740
 ```
+
+> the `sort -u` command used above can quickly run out of space when the `/tmp/` folder is mounted in memory : use its `-T /somedir/` option or the `$TMPDIR` environment variable in this case.
+
 ```bash
 head -3 nsrl
 00000079fd7aac9b2f9c988c50750e1f50b27eb5	190718x
