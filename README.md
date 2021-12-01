@@ -92,7 +92,7 @@ head -3 nsrl
 38320335 38320335 1571133700
 ```
 
-**According to X-Ways documentation** : *Now, important top tip follows: If you are creating your own hash file to import, perhaps from another forensic tool, and if you are using SHA-1, be sure to make sure your column heading in your source file is written exactly as "SHA-1" and not "SHA1" or "SHA" or "SHA 1".* ***It has to be "SHA-1", exactly, to be understood.***
+**According to X-Ways documentation** : *Now, important top tip follows : If you are creating your own hash file to import, perhaps from another forensic tool, and if you are using SHA-1, be sure to make sure your column heading in your source file is written exactly as "SHA-1" and not "SHA1" or "SHA" or "SHA 1".* ***It has to be "SHA-1", exactly, to be understood.***
 
 ```bash
 head -3 sha1
@@ -112,7 +112,7 @@ The file `sha1` weighs 1,5 Gb for 38 320 335 records.
 Extensions used for the main image formats are searched :
 
 ```bash
-re='\.(jpg|jpeg|png|gif|bmp|svg|tif|psd|pcx|webp)$'
+re='\.(jpg|jpeg|png|gif|bmp|svg|tif|psd|pcx|webp|psd|emf|wmf)$'
 unzip -p /media/NSRLFile.txt.zip | pv | ./csv2tsv | cut -f 1,4 | egrep $re | cut -f 1 | sort -u | tee image.sha1 | wc
 15GiO 0:16:47 [6,25MiB/s] [             <=>                         ]
 1335405 1335405 54751605
