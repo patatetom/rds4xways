@@ -144,25 +144,25 @@ Extract products :
 
 ```bash
 ./csv2tsv < /media/NSRLProd.txt | cut -f 1,2,5 | grep -f <( cut -f 1 microsoft | sed -e 's/^/\t/g' -e 's/$/$/g' ) | tee microsoft.product | wc
-3264 27202 179692
+7275 60577 395197
 ```
 ```bash
 cat microsoft.product
 62	the compaq personal computer startup diskette	608
 62	the compaq personal computer startup diskette	608
 …
-214741	skype for desktop	608
-214741	skype for desktop	608
+236131	2021-06 dynamic cumulative update for windows 10 version 21h1 for x86-based systems (kb5003637)	608
+236132	2021-06 dynamic cumulative update for windows 10 version 21h1 for arm64-based systems (kb5003637)	608
 ```
 
 Extract SHA1 :
 
 ```bash
 ( echo SHA-1; fgrep -f <( cut -f 1 microsoft.product | sed -e 's/^/\t/g' -e 's/$/x/g' | sort -u ) nsrl | cut -f 1 | sort -u ) | tee microsoft.sha1 | wc
-7402919 7402919 303519644
+10079199 10079199 413247124
 ```
 
-The file `microsoft.sha1` weighs 290 Mb for 7 402 918 records (~25%).
+The file `microsoft.sha1` weighs 395 Mb for 10 079 198 records (~26%).
 
 
 
