@@ -1,5 +1,5 @@
-#!/usr/bin/python2
+#!/usr/bin/python3
 import csv, sys
 for row in csv.reader(sys.stdin):
  # some filenames contain the tabulation \t character : it is suppressed
- print ('\t'.join([col.strip().replace('\t', '') for col in row])).lower()
+ print(('\t'.join([col.strip().replace('\t', '') for col in row])).lower())
