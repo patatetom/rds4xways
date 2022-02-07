@@ -90,19 +90,19 @@ for wim_file in $wim_list
 do
 	echo "# hashing files in '$wim_file'..."
 	count=$(
-		./wimlib info "$mount_point/$wim_file" |
+		wimlib-imagex info "$mount_point/$wim_file" |
 		egrep '^Image Count: +[0-9]+$' |
 		egrep -o '[0-9]+$'
 	)
 	for index in $( seq $count )
 	do
 		name=$(
-			./wimlib info "$mount_point/$wim_file" $index |
+			wimlib-imagex info "$mount_point/$wim_file" $index |
 			grep '^Name: ' |
 			sed "s;^Name: \+;# $index/$count ;"
 		)
 		echo $name
-		./wimlib mount "$mount_point/$wim_file" $index $wim_point
+		wimlib-imagex mount "$mount_point/$wim_file" $index $wim_point
 		# comment next line if you want to hash Windows Pro files
 		[[ ! "${name,,}" =~ "pro" ]] &&
 		find $wim_point/ -type f -exec $hash_bin '{}' \; |
