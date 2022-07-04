@@ -68,8 +68,8 @@ Only fields `SHA-1` and `ProductCode` are extracted from it :
 
 ```bash
 unzip -p /media/NSRLFile.txt.zip | pv | sed 1d | ./csv2tsv | cut -f 1,6 | sed 's/$/x/g' | sort -u | tee nsrl | wc
-25,0GiO 0:13:55 [30,6MiO/s] [        <=>                            ]
-182753918 365507836 8938968303
+28,6GiO 0:24:18 [20,1MiB/s] [          <=>                          ]
+210502817 421005634 10299328069
 ```
 
 > the `sort -u` command used above can quickly run out of space when the `/tmp/` folder is mounted in memory : use its `-T /somedir/` option or the `$TMPDIR` environment variable in this case.
