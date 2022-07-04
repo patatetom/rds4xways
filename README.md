@@ -25,7 +25,7 @@ If the use and thus the installation of `pv` and `tee` is optional, the installa
 
 ## Download and mount
 
-The full modern RDS Version 2.74 of september 2021 is [downloaded](https://www.nist.gov/itl/ssd/software-quality-group/national-software-reference-library-nsrl/nsrl-download/current-rds) (3,4 Gb) and used.
+The full modern RDS Version 2.77 of june 2022 is [downloaded](https://www.nist.gov/itl/ssd/software-quality-group/national-software-reference-library-nsrl/nsrl-download/current-rds) (4,2 Gb) and used.
 
 The content of the iso image `RDS_modern.iso` is made accessible through `/media/` :
 
@@ -37,15 +37,15 @@ mount -o ro ./RDS_modern.iso /media/
 
 ## Disk space
 
-Uncompaction of the archive `NSRLFile.txt.zip` would require 25 Gb of disk space for 192 677 750 records :
+Uncompaction of the archive `NSRLFile.txt.zip` would require 30 Gb of disk space for 222 113 225 records :
 
 ```bash
 unzip -p /media/NSRLFile.txt.zip | pv | wc
-25,0GiO 0:02:18 [ 184MiO/s] [     <=>                               ]
-192677750 194541093 26804404409
+28,6GiO 0:11:44 [41,6MiB/s] [    <=>                                           ]
+222113225 223814314 30736964414
 ```
 
-> `wc` results can be formated with this `bash` function `bignumbers(){ printf "%'d - " $( cat ) | sed 's/ - $//'; }` : `unzip -p /media/NSRLFile.txt.zip | pv | wc | bignumbers` will produce `192 677 750 - 194 541 093 - 26 804 404 409`
+> `wc` results can be formated with this `bash` function `bignumbers(){ printf "%'d - " $( cat ) | sed 's/ - $//'; }` : `unzip -p /media/NSRLFile.txt.zip | pv | wc | bignumbers` will produce `222 113 225 - 223 814 314 - 30 736 964 414`
 
 Extraction of strictly necessary data with reformatting will save some precious gigabytes.
 
