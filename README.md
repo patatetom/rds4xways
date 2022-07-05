@@ -159,10 +159,10 @@ Extract SHA1 :
 
 ```bash
 ( echo SHA-1; fgrep -f <( cut -f 1 microsoft.product | sed -e 's/^/\t/g' -e 's/$/x/g' | sort -u ) nsrl | cut -f 1 | sort -u ) | tee microsoft.sha1 | wc
-10079199 10079199 413247124
+10991183 10991183 450638468
 ```
 
-The file `microsoft.sha1` weighs 395 Mb for 10 079 198 records (~26%).
+The file `microsoft.sha1` weighs 430 Mb for 10 991 183 records (~23%).
 
 
 
