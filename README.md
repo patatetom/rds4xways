@@ -144,15 +144,15 @@ Extract products :
 
 ```bash
 ./csv2tsv < /media/NSRLProd.txt | cut -f 1,2,5 | grep -f <( cut -f 1 microsoft | sed -e 's/^/\t/g' -e 's/$/$/g' ) | tee microsoft.product | wc
-7275 60577 395197
+7399 61640 402337
 ```
 ```bash
 cat microsoft.product
 62	the compaq personal computer startup diskette	608
 62	the compaq personal computer startup diskette	608
 …
-236131	2021-06 dynamic cumulative update for windows 10 version 21h1 for x86-based systems (kb5003637)	608
-236132	2021-06 dynamic cumulative update for windows 10 version 21h1 for arm64-based systems (kb5003637)	608
+281008	windows 11 consumer editions april 2022	608
+281009	windows 11 business editions april 2022	608
 ```
 
 Extract SHA1 :
