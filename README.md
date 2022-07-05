@@ -10,12 +10,12 @@ Extraction of SHA1 sets from [Reference Data Set](https://www.nist.gov/itl/ssd/s
 - at least 12 Gb of free disk space
 - `bash` to bind tools
 - `unzip` to extract to stdout
-- `python2` to convert files format and preserve some space
+- `python` to convert files format and preserve some space
 - `sed` to add/delete headers and more
 - `egrep`, `fgrep` and `grep` to match strings
 - `cut` to cut fields
-- `tee` to duplicate the data stream
-- `pv` to monitor the progress of work
+- `tee` to duplicate data stream
+- `pv` to monitor progress of work
 - `wc` to do some counts
 
 Except `pv`, `tee` and `unzip`, all the above mentioned tools should be present in a Linux distribution.
