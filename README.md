@@ -101,7 +101,7 @@ SHA-1
 00000052a9eeec6c8348cfb2aea77bc1fbf8d239
 ```
 
-The file `sha1` weighs 1,8 Gb for 46 688 293 records.
+The file `sha1` weighs 1,8 Gb for 46 688 292 records.
 
 
 
@@ -162,7 +162,7 @@ Extract SHA1 :
 10991183 10991183 450638468
 ```
 
-The file `microsoft.sha1` weighs 430 Mb for 10 991 183 records (~23%).
+The file `microsoft.sha1` weighs 430 Mb for 10 991 182 records (~23%).
 
 
 
@@ -205,7 +205,7 @@ Extract SHA1 :
 25029548 25029548 1026211433
 ```
 
-The file `windows.sha1` weighs 979 Mb for 25 029 548 records (~54%).
+The file `windows.sha1` weighs 979 Mb for 25 029 547 records (~54%).
 
 
 
