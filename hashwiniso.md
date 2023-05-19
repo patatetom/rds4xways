@@ -85,3 +85,8 @@ patateom@linux:~$ grep -v '^#' image.file.iso.sha1sums | sort -u | wc -l
 patateom@linux:~$  grep -v '^#' image.file.iso.sha1sums | cut -f 1 | sort -u | wc -l
 69340
 ```
+
+
+## See also
+
+- [Fido](https://github.com/pbatard/Fido)
