@@ -45,7 +45,7 @@ unzip -p /media/NSRLFile.txt.zip | pv | wc
 222113225 223814314 30736964414
 ```
 
-> `wc` results can be formated with this `bash` function `bignumbers(){ printf "%'d - " $( cat ) | sed 's/ - $//'; }` : `unzip -p /media/NSRLFile.txt.zip | pv | wc | bignumbers` will produce `222 113 225 - 223 814 314 - 30 736 964 414`
+> `wc` results can be piped and formated with `numfmt --grouping` (if installed) or with this `bash` function `bignumbers(){ printf "%'d - " $( cat ) | sed 's/ - $//'; }`.
 
 Extraction of strictly necessary data with reformatting will save some precious gigabytes.
 
