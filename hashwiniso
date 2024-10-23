@@ -4,6 +4,7 @@
 # https://www.microsoft.com/en-us/software-download/
 # you can retrieve old Windows ISO here (not a Microsoft site) :
 # https://tb.rg-adguard.net/
+# https://uupdump.net/
 # you can also have a look here :
 # https://github.com/pbatard/Fido
 
@@ -91,8 +92,8 @@ do
 	echo "# hashing files in '$wim_file'..."
 	count=$(
 		wimlib-imagex info "$mount_point/$wim_file" |
-		egrep '^Image Count: +[0-9]+$' |
-		egrep -o '[0-9]+$'
+		grep -E '^Image Count: +[0-9]+$' |
+		grep -E -o '[0-9]+$'
 	)
 	for index in $( seq $count )
 	do
